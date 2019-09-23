@@ -70,7 +70,7 @@ public class Staff_Update extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (dbHelper.updateStaff(id, up_st_name.getText().toString(), up_st_age.getText().toString(), up_st_gender.getText().toString(), up_st_add.getText().toString(), up_st_contact.getText().toString(), up_st_role.getText().toString())){
-                    Toast.makeText(Staff_Update.this,"Updated",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Staff_Update.this,"Staff Updated Successfully",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(Staff_Update.this,staff_view.class);
                     startActivity(intent);
 
@@ -96,7 +96,7 @@ public class Staff_Update extends AppCompatActivity {
                                     Toast.makeText(Staff_Update.this, "Delete Fail", Toast.LENGTH_SHORT).show();
                                 }
                             }
-                        }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();

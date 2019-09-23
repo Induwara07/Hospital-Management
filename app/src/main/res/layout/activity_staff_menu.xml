@@ -27,7 +27,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569" />
+        app:layout_constraintVertical_bias="0.58000004" />
 
     <Button
         android:id="@+id/insert_btn2"
@@ -46,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view_btn2"
-        app:layout_constraintVertical_bias="0.931" />
+        app:layout_constraintVertical_bias="0.97" />
 
     <Button
         android:id="@+id/insert_btn4"
@@ -57,7 +57,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="8dp"
         android:background="@color/design_default_color_primary"
-        android:onClick="viewStaff"
+        android:onClick="search_st"
         android:text="@string/staffSearch"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +65,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view_btn2"
-        app:layout_constraintVertical_bias="0.634" />
+        app:layout_constraintVertical_bias="0.632" />
 
     <Button
         android:id="@+id/insert_btn3"
@@ -81,10 +81,10 @@
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view_btn2"
-        app:layout_constraintVertical_bias="0.315" />
+        app:layout_constraintVertical_bias="0.29" />
 
     <TextView
         android:id="@+id/stf_menu"
@@ -94,8 +94,8 @@
         android:layout_marginBottom="8dp"
         android:background="@android:color/background_light"
         android:fontFamily="sans-serif-black"
-        android:text="Staff Menu"
-        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/st_menu"
+        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

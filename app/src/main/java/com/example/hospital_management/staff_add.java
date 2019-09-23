@@ -40,11 +40,18 @@ public class staff_add extends AppCompatActivity {
                 String i_contact=in_contact.getText().toString();
                 String i_role=int_role.getText().toString();
 
+                //form validate for staff
 
                 if (i_name.equals("")|| i_age.equals("")|| i_role.equals("")){
-                    Toast.makeText(staff_add.this, "Fill",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(staff_add.this, "Empty Fields",Toast.LENGTH_SHORT).show();
                     return;
 
+                }
+
+                //Phone Validation
+                if(i_contact.length()>10 ||i_contact.length()< 10 ){
+                    Toast.makeText(staff_add.this, "Invalid phone Number", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 if (dbHelper.addStaffDetail(i_name, i_age, i_gender, i_address, i_contact, i_role)){
                     in_name.setText("");

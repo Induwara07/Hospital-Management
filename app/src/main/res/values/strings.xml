@@ -74,6 +74,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
+
     <string name="insert_staff">Insert</string>
     <string name="insert_st_name">Name</string>
     <string name="insert_st_age">Age</string>
@@ -104,6 +105,13 @@
     <string name="view_table_head1">ID</string>
     <string name="view_table_head2">Name</string>
     <string name="view_table_head3">Qty</string>
+
+
+    <string name="up_st_n">Update Staff</string>
+    <string name="in_st_n">Insert Staff</string>
+    <string name="st_menu">Staff Menu</string>
+
+
 
 
 </resources>
