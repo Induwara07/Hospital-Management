@@ -12,9 +12,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
     public static String DATABASE_NAME="hospital_database";
     //private static final int DATABASE_VERSION = 4;
 
+<<<<<<< HEAD
 
     private static final String TABLE_DRUGS = "drugs";
     private static final String KEY_DRUGID = "id";
@@ -37,6 +39,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_DRUGS = "CREATE TABLE " + TABLE_DRUGS + "(" + KEY_DRUGID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_DRUGNAME + " TEXT, "+ KEY_MANUFACTURER + " TEXT, "+ KEY_QUANTITY + " TEXT, "+ KEY_PRICE + " TEXT, "+ KEY_DESCRIPTION + " TEXT );";//   private static final String CREATE_TABLE_DOCTORS = "CREATE TABLE " + UserMaster.Doctors.TABLE_NAME + "(" +UserMaster.Doctors.doctor_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," + UserMaster.Doctors.doctor_name + " TEXT,"+ UserMaster.Doctors.doctor_age + "TEXT," +UserMaster.Doctors.doctor_designation+ " TEXT," +UserMaster.Doctors.doctor_address+ "TEXT," +UserMaster.Doctors.doctor_phone+ "TEXT," +UserMaster.Doctors.doctor_ward + "TEXT)";
     private static final String CREATE_TABLE_DOCTORS =  "CREATE TABLE " + UserMaster.Doctors.TABLE_NAME+ "(ID INTEGER PRIMARY KEY, name TEXT, age TEXT, designation TEXT, address TEXT, phone TEXT, ward TEXT)";
     private static final String CREATE_TABLE_STAFF = "CREATE TABLE " + TABLE_STAFF + "(" + S_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + S_NAME + " TEXT, " + S_AGE + " TEXT ,  " + S_GENDER + " TEXT,   " + S_ADDRESS + " TEXT ,   " + S_CONTACT + " TEXT ,   " + S_ROLE + " TEXT   );";
+=======
+    private static final String TABLE_USER = "patient";
+    private static final String P_id = "id";
+    private static final String P_NAME = "name";
+    private static final String P_AGE = "age";
+    private static final String P_CONTACTNO= "contNo";
+    private static final String P_GENDER= "gender";
+    private static final String P_ADDRESS = "address";
+    private static final String P_DISEASE= "disease";
+    private static final String P_GURNAME= "gurName";
+
+   // private static final String CREATE_TABLE_DRUGS = "CREATE TABLE " + TABLE_DRUGS + "(" + KEY_DRUGID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_DRUGNAME + " TEXT, "+ KEY_MANUFACTURER + " TEXT, "+ KEY_QUANTITY + " TEXT, "+ KEY_PRICE + " TEXT, "+ KEY_DESCRIPTION + " TEXT );";
+   // private static final String CREATE_TABLE_PATIENT = "CREATE TABLE " + TABLE_USER + "(" + P_id + " INTEGER PRIMARY KEY AUTOINCREMENT," + P_NAME + " TEXT, "+ P_AGE + " TEXT, "+ P_CONTACTNO+ "  TEXT, "+ P_GENDER+ "  TEXT, "+ P_ADDRESS+ "  TEXT, "+ P_DISEASE+ "  TEXT, "+ P_GURNAME+ "  TEXT );";
+    private static final String CREATE_TABLE_PATIENT = "CREATE TABLE " + TABLE_USER + "(ID INETGER PRIMARY KEY, name TEXT, age TEXT, contact TEXT, gender TEXT, address TEXT, disease TEXT, guadianName TEXT )";
+>>>>>>> patient management
 
     public DatabaseHelper(Context context) {
         super(context,DATABASE_NAME,null,1);
@@ -44,6 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+<<<<<<< HEAD
         db.execSQL(CREATE_TABLE_DRUGS);
         db.execSQL(CREATE_TABLE_DOCTORS);
         db.execSQL(CREATE_TABLE_STAFF);
@@ -67,76 +85,108 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }else {
             return false;
         }
+=======
+
+        db.execSQL(CREATE_TABLE_PATIENT);
     }
 
-    public ArrayList<DrugModel> getAllDrugs() {
-        // ArrayList<DrugsModel> drugsModelArrayList = new ArrayList<DrugsModel>();
-        ArrayList<DrugModel> drugsModelArrayList = null;
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int old, int i1) {
 
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_DRUGS,null);
+    }
 
 
+    //-------------------------------------
+    //Patient Management ==================
 
-//        String selectQuery = "SELECT  * FROM " + TABLE_DRUGS;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor c = db.rawQuery(selectQuery, null);
-        // looping through all rows and adding to list
-        if (c.moveToFirst()) {
-            drugsModelArrayList = new ArrayList<DrugModel>();
-            do {
-                DrugModel drugsModel = new DrugModel();
-                drugsModel.setId(c.getInt(c.getColumnIndex(KEY_DRUGID)));
-                drugsModel.setName(c.getString(c.getColumnIndex(KEY_DRUGNAME)));
-                drugsModel.setManufacturer(c.getString(c.getColumnIndex(KEY_MANUFACTURER)));
-                drugsModel.setQuantity(c.getString(c.getColumnIndex(KEY_QUANTITY)));
-                drugsModel.setPrice(c.getString(c.getColumnIndex(KEY_PRICE)));
-                drugsModel.setDescription(c.getString(c.getColumnIndex(KEY_DESCRIPTION)));
-                // adding to drugs list
-                drugsModelArrayList.add(drugsModel);
-            } while (c.moveToNext());
+    public boolean addPatientDetail(String name, String age,String contact,String gender,String address,String disease,String gurdian){
+        SQLiteDatabase db = this.getWritableDatabase();
+    //content value create
+    ContentValues values = new ContentValues();
+    values.put(P_NAME,name);
+    values.put(P_AGE,age);
+    values.put(P_CONTACTNO,contact);
+    values.put(P_GENDER,gender);
+    values.put(P_ADDRESS,address);
+    values.put(P_DISEASE,disease);
+    values.put(P_GURNAME,gurdian);
+
+    long insert = db.insert(TABLE_USER, null,values);
+
+    if(insert>=1){
+        return true;
+    }else{
+        return false;
+>>>>>>> patient management
+    }
+ }
+
+    public ArrayList<PatientUser> getAllUsers(){
+        ArrayList<PatientUser> patientModelArrayList=null;
+
+        SQLiteDatabase db =getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_USER,null);
+
+        if(c.moveToFirst()){
+        patientModelArrayList = new ArrayList<PatientUser>();
+
+        do {
+            PatientUser patientUser =new PatientUser();
+
+            patientUser.setId(c.getInt(c.getColumnIndex(P_id)));
+            patientUser.setName(c.getString(c.getColumnIndex(P_NAME)));
+            patientUser.setAge(c.getString(c.getColumnIndex(P_AGE)));
+            patientUser.setContNo(c.getString(c.getColumnIndex(P_CONTACTNO)));
+            patientUser.setGender(c.getString(c.getColumnIndex(P_GENDER)));
+            patientUser.setAddress(c.getString(c.getColumnIndex(P_ADDRESS)));
+            patientUser.setDisease(c.getString(c.getColumnIndex(P_DISEASE)));
+            patientUser.setGurName(c.getString(c.getColumnIndex(P_GURNAME)));
+
+            patientModelArrayList.add(patientUser);
+        }while (c.moveToNext());
         }
-        return drugsModelArrayList;
-
-
+        return patientModelArrayList;
     }
-    public ArrayList<DrugModel> getDrug(String id){
 
-        ArrayList<DrugModel> drugArray = null;
+    public ArrayList<PatientUser> getPatient(String id){
+
+        ArrayList<PatientUser> patientArray = null;
         SQLiteDatabase db=getReadableDatabase();
         String[] args={id};
-        Cursor c=db.rawQuery("SELECT * FROM "+TABLE_DRUGS+" WHERE "+KEY_DRUGID+" = ?",args);
+        Cursor c=db.rawQuery("SELECT * FROM "+TABLE_USER+" WHERE "+P_id+" = ?",args);
         if(c.moveToFirst()){
-            drugArray=new ArrayList<DrugModel>();
+            patientArray=new ArrayList<PatientUser>();
             do{
-                DrugModel drugMod=new DrugModel();
-                drugMod.setId(c.getInt(c.getColumnIndex(KEY_DRUGID)));
-                drugMod.setName(c.getString(c.getColumnIndex(KEY_DRUGNAME)));
-                drugMod.setManufacturer(c.getString(c.getColumnIndex(KEY_MANUFACTURER)));
-                drugMod.setQuantity(c.getString(c.getColumnIndex(KEY_QUANTITY)));
-                drugMod.setPrice(c.getString(c.getColumnIndex(KEY_PRICE)));
-                drugMod.setDescription(c.getString(c.getColumnIndex(KEY_DESCRIPTION)));
-                drugArray.add(drugMod);
+                PatientUser PatientM=new PatientUser();
+                PatientM.setId(c.getInt(c.getColumnIndex(P_id)));
+                PatientM.setName(c.getString(c.getColumnIndex(P_NAME)));
+                PatientM.setAge(c.getString(c.getColumnIndex(P_AGE)));
+                PatientM.setContNo(c.getString(c.getColumnIndex(P_CONTACTNO)));
+                PatientM.setGender(c.getString(c.getColumnIndex(P_GENDER)));
+                PatientM.setAddress(c.getString(c.getColumnIndex(P_ADDRESS)));
+                PatientM.setDisease(c.getString(c.getColumnIndex(P_DISEASE)));
+                PatientM.setGurName(c.getString(c.getColumnIndex(P_GURNAME)));
+                patientArray.add(PatientM);
 
             }while (c.moveToNext());
         }
-        return drugArray;
+        return patientArray;
 
     }
 
-    public Boolean updateDrugs(int id,String name, String manufacturer,String quantity,String price,String description) {
+    public boolean updatePatient(int id ,String name, String age,String contact,String gender,String address,String disease,String gurdian){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Creating content values
         ContentValues values = new ContentValues();
-        values.put(this.KEY_DRUGNAME, name);
-        values.put(KEY_MANUFACTURER,manufacturer);
-        values.put(KEY_QUANTITY,quantity);
-        values.put(KEY_PRICE,price);
-        values.put(KEY_DESCRIPTION,description);
-        // update row in drugs table base on drugs.is value
-        //String args=Integer.toString(id);
-        int row=db.update(TABLE_DRUGS, values,KEY_DRUGID + " = ?",new String[]{String.valueOf(id)});
+        values.put(this.P_NAME,name);
+        values.put(P_AGE,age);
+        values.put(P_CONTACTNO,contact);
+        values.put(P_GENDER,gender);
+        values.put(P_ADDRESS,address);
+        values.put(P_DISEASE,disease);
+        values.put(P_GURNAME,gurdian);
+
+        int row=db.update(TABLE_USER, values,P_id + " = ?",new String[]{String.valueOf(id)});
         if(row>=1){
             return true;
         }else {
@@ -144,12 +194,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean deletePatient(int id) {
 
-    public Boolean deleteDrug(int id) {
-
-        // delete row in drugs table based on id
+        // delete row in patient table  id
         SQLiteDatabase db = this.getWritableDatabase();
-        int row=db.delete(TABLE_DRUGS, KEY_DRUGID + " = ?",
+        int row=db.delete(TABLE_USER, P_id + " = ?",
                 new String[]{String.valueOf(id)});
 
         if(row>=1){
@@ -157,44 +206,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }else {
             return false;
         }
-
     }
 
+    public ArrayList<PatientUser> searchPatients(String key) { //Search details patients
 
-    public ArrayList<DrugModel> searchDrugs(String drug) {
-        // ArrayList<DrugsModel> drugsModelArrayList = new ArrayList<DrugsModel>();
-        ArrayList<DrugModel> drugsModels = null;
+        ArrayList<PatientUser> patient =null;
 
         try {
 
             SQLiteDatabase db = getReadableDatabase();
-            Cursor c = db.rawQuery("SELECT * FROM " + TABLE_DRUGS + " WHERE " + KEY_DRUGNAME + " LIKE ?", new String[] { "%" + drug + "%" });
+            Cursor c = db.rawQuery("SELECT * FROM " + TABLE_USER + " WHERE " + P_AGE + " LIKE ?", new String[] {"%" +key+ "%"});
 
 
-//        String selectQuery = "SELECT  * FROM " + TABLE_DRUGS;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor c = db.rawQuery(selectQuery, null);
-            // looping through all rows and adding to list
             if (c.moveToFirst()) {
-                drugsModels = new ArrayList<DrugModel>();
+                patient = new ArrayList<PatientUser>();
+
                 do {
-                    DrugModel drugsModel = new DrugModel();
-                    drugsModel.setId(c.getInt(c.getColumnIndex(KEY_DRUGID)));
-                    drugsModel.setName(c.getString(c.getColumnIndex(KEY_DRUGNAME)));
-                    drugsModel.setManufacturer(c.getString(c.getColumnIndex(KEY_MANUFACTURER)));
-                    drugsModel.setQuantity(c.getString(c.getColumnIndex(KEY_QUANTITY)));
-                    drugsModel.setPrice(c.getString(c.getColumnIndex(KEY_PRICE)));
-                    drugsModel.setDescription(c.getString(c.getColumnIndex(KEY_DESCRIPTION)));
-                    // adding to drugs list
-                    drugsModels.add(drugsModel);
+                    PatientUser patientModel = new PatientUser();
+                    patientModel.setId(c.getInt(c.getColumnIndex(P_id)));
+                    patientModel.setName(c.getString(c.getColumnIndex(P_NAME)));
+                    patientModel.setAge(c.getString(c.getColumnIndex(P_AGE)));
+                    patientModel.setAddress(c.getString(c.getColumnIndex(P_ADDRESS)));
+                    patientModel.setContNo(c.getString(c.getColumnIndex(P_CONTACTNO)));
+                    patientModel.setDisease(c.getString(c.getColumnIndex(P_DISEASE)));
+                    patientModel.setGender(c.getString(c.getColumnIndex(P_GENDER)));
+                    patientModel.setGurName(c.getString(c.getColumnIndex(P_GURNAME)));
+
+                    // adding to Patients list
+                    patient.add(patientModel);
                 } while (c.moveToNext());
             }
-        }catch(Exception e) {
-            drugsModels = null;
+        }catch(Exception e){
+            patient=null;
         }
-        return drugsModels;
+        return patient;
     }
 
+<<<<<<< HEAD
     //------------------------------------------------------------------------------
     //Doctor Management ==================
 
@@ -430,6 +478,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+=======
+>>>>>>> patient management
 }
 
 

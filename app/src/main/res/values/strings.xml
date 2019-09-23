@@ -105,6 +105,7 @@
     <string name="view_table_head1">ID</string>
     <string name="view_table_head2">Name</string>
     <string name="view_table_head3">Qty</string>
+<<<<<<< HEAD
 
 
     <string name="up_st_n">Update Staff</string>
@@ -114,4 +115,39 @@
 
 
 
+=======
+    <string name="ADDPATIENT">ADD PATIENT</string>
+    <string name="VIEWPATIENTLIST">VIEW PATIENT LIST</string>
+    <string name="patientname">Patient Name :</string>
+    <string name="pname" />
+    <string name="age" />
+    <string name="location" />
+    <string name="contactnumber" />
+    <string name="diseases" />
+    <string name="gender" />
+    <string name="guardianName" />
+    <string name="Age">Age :</string>
+    <string name="Address">Address :</string>
+    <string name="ContactNo">Contact Number :</string>
+    <string name="Diseases">Diseases :</string>
+    <string name="Gender">Gender :</string>
+    <string name="GuardianName">Guardian Name :</string>
+    <string name="Register">Register</string>
+    <string name="patientList">Patients List</string>
+    <string name="AddNewPatient">NEW PATIENT</string>
+    <string name="viewDetails">VIEW DETAILS</string>
+    <string name="deleteDetails">DELETE DETAILS</string>
+    <string name="Lname">Name :</string>
+    <string name="Lage">Age :</string>
+    <string name="Laddress">Address</string>
+    <string name="Ldisease">Disease</string>
+    <string name="Lcontact">Contact Number :</string>
+    <string name="Lgender">Gender :</string>
+    <string name="Lguardian">Guardian Name :</string>
+    <string name="Update">UPDATE DETAILS</string>
+    <string name="view_table">ID</string>
+    <string name="view_table2">Name</string>
+    <string name="view_table3">Age</string>
+    <string name="updateDetails">UPDATE</string>
+>>>>>>> patient management
 </resources>
